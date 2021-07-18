@@ -1,4 +1,4 @@
-# Treehouse WebDev project 10
+# Treehouse WebDev Project 10
 ## Build a SQL Library Manager
 
 You have been tasked with creating an application for your local library to help them manage their book collections. The librarian has been using a simple SQLite database and has been entering data manually. The application you create should provide a more intuitive way to manage the library's collection of books.
