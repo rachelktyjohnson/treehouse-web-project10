@@ -22,6 +22,7 @@ function asyncHandler(cb) {
 /* GET new book form */
 router.get('/new', asyncHandler(async(req,res)=>{
     //TODO: render the new book form
+    res.render('new_book', {title: "New Book"})
 }));
 
 /* POST new book form data */
@@ -37,7 +38,7 @@ router.get('/new', asyncHandler(async(req,res)=>{
 router.get('/', asyncHandler(async(req,res)=>{
     //res.render('index', { title: 'SQL Library Manager' });
     const books = await Book.findAll();
-    res.render('index', {books, title:"Books"})
+    res.render('index', {books, title:"SQL Library Manager"})
 }));
 
 /* GET individual book. */
