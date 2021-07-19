@@ -37,42 +37,78 @@ router.post('/new', asyncHandler(async(req,res)=>{
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req,res)=>{
-    //res.render('index', { title: 'SQL Library Manager' });
     const books = await Book.findAll();
     res.render('index', {books, title:"SQL Library Manager"})
 }));
 
 /* GET individual book. */
-router.get('/:id', asyncHandler(async(req,res)=>{
+router.get('/:id', asyncHandler(async(req,res, next)=>{
     const book = await Book.findByPk(req.params.id);
-    res.render('single',{book, title:book.title})
+    if (book){
+        res.render('single',{book, title:book.title})
+    } else {
+        const err = new Error();
+        err.status = 404;
+        err.message = "No book exists with that ID";
+        next(err);
+    }
+
 }))
 
 /////////////////UPDATE//////////////////
 
 /* GET update book */
-router.get('/:id/update', asyncHandler(async(req,res)=>{
+router.get('/:id/update', asyncHandler(async(req,res, next)=>{
     const book = await Book.findByPk(req.params.id);
-    res.render('update_book', {book:book, title:"Update Book"})
+    if (book){
+        res.render('update_book', {book:book, title:"Update Book"})
+    } else {
+        const err = new Error();
+        err.status = 404;
+        err.message = "No book exists with that ID";
+        next(err);
+    }
+
 }))
 
 /* POST update book */
-router.post('/:id/update', asyncHandler(async(req,res)=>{
+router.post('/:id/update', asyncHandler(async(req,res, next)=>{
     const book = await Book.findByPk(req.params.id);
-    await book.update(req.body);
-    res.redirect('/books/'+book.id);
+    if(book){
+        await book.update(req.body);
+        res.redirect('/books/'+book.id);
+    } else {
+        const err = new Error();
+        err.status = 404;
+        err.message = "No book exists with that ID";
+        next(err);
+    }
 }))
 
 /////////////////DELETE//////////////////
-router.get('/:id/delete', asyncHandler(async(req,res)=>{
+router.get('/:id/delete', asyncHandler(async(req,res, next)=>{
     const book = await Book.findByPk(req.params.id);
-    res.render('delete', {book:book, title:"Delete Book?"})
+    if(book){
+        res.render('delete', {book:book, title:"Delete Book?"})
+    } else {
+        const err = new Error();
+        err.status = 404;
+        err.message = "No book exists with that ID";
+        next(err);
+    }
 }))
 
-router.get('/:id/delete', asyncHandler(async(req,res)=>{
-    //TODO: Get Book object
-    //TODO: Destroy it!
-    //TODO: Redirect to home page
+router.post('/:id/delete', asyncHandler(async(req,res, next)=>{
+    const book = await Book.findByPk(req.params.id);
+    if(book){
+        await book.destroy();
+        res.redirect('/');
+    } else {
+        const err = new Error();
+        err.status = 404;
+        err.message = "No book exists with that ID";
+        next(err);
+    }
 }))
 
 module.exports = router;

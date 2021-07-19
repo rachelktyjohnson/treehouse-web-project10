@@ -48,6 +48,7 @@ a.button.back:hover{
 
 a.button.delete{
   background: #992323;
+  margin-left:20px;
 }
 a.button.delete:hover{
   background: #7b1e1e;
@@ -56,6 +57,14 @@ a.button.delete:hover{
 form a.button, input[type=submit] {
   margin-left: 140px;
   transition: 0.4s;
+}
+
+input[type=submit].delete{
+  background:#992323;
+}
+
+input[type=submit].delete:hover{
+  background:#7b1e1e;
 }
 
 input[type=submit] {

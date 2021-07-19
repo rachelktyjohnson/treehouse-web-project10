@@ -62,7 +62,12 @@ app.use(function(err, req, res, next) {
   err.message = err.message || "Sorry! There was an unexpected error on the server.";
   console.log(err.status);
   console.log(err.message);
-  res.render('error', {error:err});
+  if (err.status===404){
+    res.render('page_not_found', {error:err})
+  } else {
+    res.render('error', {error:err});
+  }
+
 });
 
 module.exports = app;
