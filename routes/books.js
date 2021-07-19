@@ -37,14 +37,13 @@ router.get('/new', asyncHandler(async(req,res)=>{
 router.get('/', asyncHandler(async(req,res)=>{
     //res.render('index', { title: 'SQL Library Manager' });
     const books = await Book.findAll();
-    res.json(books);
+    res.render('index', {books, title:"Books"})
 }));
 
 /* GET individual book. */
 router.get('/:id', asyncHandler(async(req,res)=>{
     const book = await Book.findByPk(req.params.id);
-    res.json(book);
-    //TODO: Render actual page
+    res.render('single',{book, title:book.title})
 }))
 
 /////////////////UPDATE//////////////////

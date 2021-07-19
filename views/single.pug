@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    a(class='button', href='/') < Back
+    h1= book.title
+    h2 Author:
+    p= book.author
+    h2 Genre:
+    p= book.genre
+    h2 Year:
+    p= book.year
+    hr
+    a(class='button', href='/') Edit Book
+    a(class='button', href='/') Delete Book
