@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const Book = require('../models').Book;
 
 /* Handler function to wrap each route. */
 function asyncHandler(cb) {
@@ -17,8 +16,7 @@ function asyncHandler(cb) {
 /* GET home page. */
 router.get('/', asyncHandler(async(req,res)=>{
   //res.render('index', { title: 'SQL Library Manager' });
-  const books = await Book.findAll();
-  res.json(books);
+  res.redirect('/books');
 }));
 
 module.exports = router;

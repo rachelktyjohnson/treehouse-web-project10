@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var booksRouter = require('./routes/books');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static('public'))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/books', booksRouter);
 
 //import database and models
 let sequelize = require('./models').sequelize;
