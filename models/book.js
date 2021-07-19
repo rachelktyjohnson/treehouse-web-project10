@@ -39,7 +39,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     genre: DataTypes.STRING,
-    year: DataTypes.INTEGER
+    year: DataTypes.INTEGER,
+    image: {
+      type: DataTypes.STRING,
+      default: "https://via.placeholder.com/200x300?text=Book"
+    }
   }, {
     sequelize,
     modelName: 'Book',
