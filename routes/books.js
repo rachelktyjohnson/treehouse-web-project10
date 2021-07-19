@@ -51,13 +51,13 @@ router.get('/:id', asyncHandler(async(req,res)=>{
 /////////////////UPDATE//////////////////
 
 /* POST update book */
-router.get('/:id', asyncHandler(async(req,res)=>{
-    //TODO: Get the Book listing
-    //TODO: Render the form page with book details
+router.get('/:id/update', asyncHandler(async(req,res)=>{
+    const book = await Book.findByPk(req.params.id);
+    res.render('update_book', {book:book, title:"Update Book"})
 }))
 
 /* POST update book */
-router.post('/:id', asyncHandler(async(req,res)=>{
+router.post('/:id/update', asyncHandler(async(req,res)=>{
     //TODO: Get Book object
     //TODO: Update book info in database using req body
     //TODO: Redirect to book page

@@ -12,7 +12,7 @@ block content
             h2 Year:
             p= book.year
             hr
-            a(class='button edit', href='/') Edit Book
-            a(class='button delete', href='/') Delete Book
+            a(class='button edit', href='/books/'+book.id+'/update') Edit Book
+            a(class='button delete', href='/books/'+book.id+'/delete') Delete Book
         div(class='right')
             img(src=book.image alt=book.title)
