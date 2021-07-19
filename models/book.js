@@ -18,14 +18,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        msg: "Please enter a title"
+        notEmpty:{
+          msg: "Please enter a title"
+        },
+        notNull: {
+          msg: "Please enter a title"
+        }
       }
     },
     author: {
       type:DataTypes.STRING,
       allowNull: false,
       validate: {
-        msg: "Please enter an author"
+        notEmpty: {
+          msg: "Please enter an author"
+        },
+        notNull: {
+          msg: "Please enter an author"
+        }
       }
     },
     genre: DataTypes.STRING,

@@ -22,6 +22,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//import database and models
+let sequelize = require('./models').sequelize;
+
+
+(async () => {
+  try{
+    await sequelize.authenticate();
+    console.log('Connection to the database successful!');
+  }catch (error) {
+    if(error.name === 'SequelizeValidationError') {
+      //pull all the errors into an array
+      const errors = error.errors.map(err => err.message);
+      console.error('Validation errors: ', errors);
+    } else {
+      throw error;
+    }
+  }
+})();
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
