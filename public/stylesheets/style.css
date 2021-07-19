@@ -23,6 +23,24 @@ a.button, input[type=submit] {
   font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
+  display:inline-block;
+  margin:20px 0;
+}
+
+a.button.back{
+  background:#aaa;
+}
+
+a.button.back:hover{
+  background:#888;
+}
+
+a.button.delete{
+  background: #992323;
+  margin-left:20px;
+}
+a.button.delete:hover{
+  background: #7b1e1e;
 }
 
 form a.button, input[type=submit] {

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    a(class='button', href='/') < Back
+    a(class='button back', href='/') < Back
     h1= book.title
     h2 Author:
     p= book.author
@@ -10,5 +10,5 @@ block content
     h2 Year:
     p= book.year
     hr
-    a(class='button', href='/') Edit Book
-    a(class='button', href='/') Delete Book
+    a(class='button edit', href='/') Edit Book
+    a(class='button delete', href='/') Delete Book
