@@ -21,7 +21,7 @@ function asyncHandler(cb) {
 
 /* GET new book form */
 router.get('/new', asyncHandler(async(req,res)=>{
-    res.render('new_book', {title: "New Book"})
+    res.render('new_book', {book: {}, title: "New Book"})
 }));
 
 /* POST new book form data */
@@ -29,8 +29,21 @@ router.post('/new', asyncHandler(async(req,res)=>{
     if (req.body.image===""){
         req.body.image= "https://via.placeholder.com/200x300?text=Book"
     }
-    let book = await Book.create(req.body);
-    res.redirect('/books/'+book.id);
+    let book;
+    try{
+        let book = await Book.create(req.body);
+        res.redirect('/books/'+book.id);
+    } catch (error) {
+        if (error.name==="SequelizeValidationError"){
+            book = await Book.build(req.body);
+            res.render("new_book",{
+                book:book,
+                errors: error.errors,
+                title: "New Book"
+            })
+        }
+    }
+
 }));
 
 /////////////////READ//////////////////
@@ -69,20 +82,32 @@ router.get('/:id/update', asyncHandler(async(req,res, next)=>{
         next(err);
     }
 
+
 }))
 
 /* POST update book */
 router.post('/:id/update', asyncHandler(async(req,res, next)=>{
     const book = await Book.findByPk(req.params.id);
     if(book){
-        await book.update(req.body);
-        res.redirect('/books/'+book.id);
+        try{
+            await book.update(req.body);
+            res.redirect('/books/'+book.id);
+        } catch (error) {
+            if (error.name==="SequelizeValidationError"){
+                res.render("update_book",{
+                    book:book,
+                    errors: error.errors,
+                    title: "Update Book"
+                })
+            }
+        }
     } else {
         const err = new Error();
         err.status = 404;
         err.message = "No book exists with that ID";
         next(err);
     }
+
 }))
 
 /////////////////DELETE//////////////////

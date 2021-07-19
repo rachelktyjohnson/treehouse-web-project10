@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
   //next(createError(404));
   const error = new Error();
   error.status = 404;
-  error.message = "Oops! Page not found.";
+  error.message = error.message || "Oops! Page not found.";
   res.render('page_not_found', {error})
 });
 
