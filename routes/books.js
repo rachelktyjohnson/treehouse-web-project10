@@ -21,15 +21,16 @@ function asyncHandler(cb) {
 
 /* GET new book form */
 router.get('/new', asyncHandler(async(req,res)=>{
-    //TODO: render the new book form
     res.render('new_book', {title: "New Book"})
 }));
 
 /* POST new book form data */
-router.get('/new', asyncHandler(async(req,res)=>{
-    //TODO: posts new book to database
-
-    //TODO: redirects to new book single page
+router.post('/new', asyncHandler(async(req,res)=>{
+    if (req.body.image===""){
+        req.body.image= "https://via.placeholder.com/200x300?text=Book"
+    }
+    let book = await Book.create(req.body);
+    res.redirect('/books/'+book.id);
 }));
 
 /////////////////READ//////////////////
