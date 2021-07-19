@@ -5,6 +5,17 @@ body {
   font-family: 'Roboto Slab', serif;
 }
 
+div.single-container{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:50px;
+}
+
+div.right{
+  display:flex;
+  height:100%;
+}
+
 a {
   color: #019875;
   text-decoration: none;
