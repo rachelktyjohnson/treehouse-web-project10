@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 Warning, this can't be undone!
+    h2= "Delete '"+book.title+"'?"
+    a(class='button delete', href='/books/' + book.id + '/delete') Yes, delete book
+    br
+    a(class='button back', href='/') < Back

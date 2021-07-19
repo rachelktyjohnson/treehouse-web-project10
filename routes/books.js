@@ -58,18 +58,15 @@ router.get('/:id/update', asyncHandler(async(req,res)=>{
 
 /* POST update book */
 router.post('/:id/update', asyncHandler(async(req,res)=>{
-    //TODO: Get Book object
     const book = await Book.findByPk(req.params.id);
-    //TODO: Update book info in database using req body
     await book.update(req.body);
-    //TODO: Redirect to book page
     res.redirect('/books/'+book.id);
 }))
 
 /////////////////DELETE//////////////////
 router.get('/:id/delete', asyncHandler(async(req,res)=>{
-    //TODO: Get Book
-    //TODO: render ARE YOU SURE page with book details
+    const book = await Book.findByPk(req.params.id);
+    res.render('delete', {book:book, title:"Delete Book?"})
 }))
 
 router.get('/:id/delete', asyncHandler(async(req,res)=>{
