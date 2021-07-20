@@ -112,6 +112,7 @@ router.get('/', asyncHandler(async(req,res)=>{
     if (end_index>count){
         end_index = count
     }
+    const pages = Math.ceil(count/books_per_page);
     res.render('index', {
         books,
         title:"SQL Library Manager",
@@ -119,7 +120,9 @@ router.get('/', asyncHandler(async(req,res)=>{
         results,
         count,
         start_index,
-        end_index
+        end_index,
+        pages,
+        page
     })
 }));
 

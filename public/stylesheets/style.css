@@ -173,3 +173,14 @@ a.see-all-books{
 table{
   width:100%;
 }
+
+.page-button{
+  padding:10px;
+  background:#eee;
+  margin-right:5px;
+}
+
+.page-button.active{
+  background:#019875;
+  color:white;
+}

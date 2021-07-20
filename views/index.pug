@@ -26,6 +26,15 @@ block content
                         td= book.genre
                         td= book.year
         p Showing results #{start_index}-#{end_index} out of #{count} books
+
+        - let n = 1;
+        while n<=pages
+            if n==page
+                a(class='page-button active' href='/books?s='+searchTerm+'&p='+n)= n++
+            else
+                a(class='page-button' href='/books?s='+searchTerm+'&p='+n)= n++
+
+
     if(!results)
         div
             p There are no results to show
