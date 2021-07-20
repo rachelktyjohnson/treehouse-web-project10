@@ -8,3 +8,5 @@ In this project, you will build a web application that will include pages to lis
 This project provides a great opportunity to start familiarizing yourself with implementing and utilizing a database for data persistence and leveraging helpful database-related tools to view and interact with your database.
 
 After completing this project, you'll be able to add true data persistence in your projects and implement, modify, interact with and maintain your own local custom SQLite database. You will also have a powerful new skill to add to your resume.
+
+## To test pagination of search results, the "Fantasy" Genre has more than 10 results
