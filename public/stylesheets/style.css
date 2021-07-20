@@ -132,3 +132,34 @@ input[type=text] {
 .error {
   color: rgb(236, 15, 15);
 }
+
+.listing-header{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  width:50%;
+}
+
+.listing-header p{
+  margin:0;
+}
+
+.searchbar form{
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+}
+
+.searchbar form input[type='text']{
+  width:200px;
+  border:2px solid #019875;;
+}
+
+.searchbar form input[type='submit']{
+  margin: 0;
+  border-radius:0;
+  height:100%;
+}

@@ -2,8 +2,13 @@ extends layout
 
 block content
     h1= title
-    p
-        a(class="button" href="/books/new") Create New Book
+    div(class='listing-header')
+        p
+            a(class="button" href="/books/new") Create New Book
+        div(class='searchbar')
+            form(method='post')
+                input(type='text' name='search' id='search' placeholder='title, author, genre, year...')
+                input(type='submit', value='search')
     table
         thead
             tr
