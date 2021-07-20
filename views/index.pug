@@ -6,20 +6,26 @@ block content
         p
             a(class="button" href="/books/new") Create New Book
         div(class='searchbar')
-            form(method='post')
-                input(type='text' name='search' id='search' placeholder='title, author, genre, year...')
+            form(method='get')
+                input(type='text' name='s' id='search' placeholder='title, author, genre, year...' value=searchTerm)
                 input(type='submit', value='search')
-    table
-        thead
-            tr
-                th Title
-                th Author
-                th Genre
-                th Year
-            each book in books
+    if (results)
+        table
+            thead
                 tr
-                    td
-                        a(href="/books/"+book.id)= book.title
-                    td= book.author
-                    td= book.genre
-                    td= book.year
+                    th Title
+                    th Author
+                    th Genre
+                    th Year
+                each book in books
+                    tr
+                        td
+                            a(href="/books/"+book.id)= book.title
+                        td= book.author
+                        td= book.genre
+                        td= book.year
+    if(!results)
+        div
+            p There are no results to show
+    if(searched)
+        a(href='/' class='see-all-books') See all books
