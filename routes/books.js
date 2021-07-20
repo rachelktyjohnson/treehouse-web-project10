@@ -52,42 +52,75 @@ router.post('/new', asyncHandler(async(req,res)=>{
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req,res)=>{
-    const searchTerm = req.query.s;
-    let books;
+    const searchTerm = req.query.s || "";
+    const page = req.query.p || 1;
+    const books_per_page = 10;
+    const offset = (page-1)*books_per_page;
     let results = true;
-    let searched = true;
-    if (searchTerm){
-        books = await Book.findAll({
-            where:{
-                [Op.or]: [
-                    {title: {
+    const books = await Book.findAll({
+        where:{
+            [Op.or]: [
+                {title: {
+                    [Op.substring]: searchTerm
+                    }
+                },
+                {author: {
                         [Op.substring]: searchTerm
-                        }
-                    },
-                    {author: {
-                            [Op.substring]: searchTerm
-                        }
-                    },
-                    {genre: {
-                            [Op.substring]: searchTerm
-                        }
-                    },
-                    {year: {
-                            [Op.substring]: searchTerm
-                        }
-                    },
-                ]
-            }
-        })
-    } else {
-        books = await Book.findAll();
-        searched = false;
-    }
-    if (books.length<=0){
+                    }
+                },
+                {genre: {
+                        [Op.substring]: searchTerm
+                    }
+                },
+                {year: {
+                        [Op.substring]: searchTerm
+                    }
+                },
+            ]
+        },
+        limit:books_per_page,
+        offset:offset
+    })
+    const count = await Book.count({
+        where:{
+            [Op.or]: [
+                {title: {
+                        [Op.substring]: searchTerm
+                    }
+                },
+                {author: {
+                        [Op.substring]: searchTerm
+                    }
+                },
+                {genre: {
+                        [Op.substring]: searchTerm
+                    }
+                },
+                {year: {
+                        [Op.substring]: searchTerm
+                    }
+                },
+            ]
+        }
+    })
+    if (count<=0){
         results = false;
     }
 
-    res.render('index', {books, title:"SQL Library Manager", searchTerm, results, searched})
+    let end_index = page*10;
+    let start_index = end_index-books_per_page+1;
+    if (end_index>count){
+        end_index = count
+    }
+    res.render('index', {
+        books,
+        title:"SQL Library Manager",
+        searchTerm,
+        results,
+        count,
+        start_index,
+        end_index
+    })
 }));
 
 /* GET individual book. */

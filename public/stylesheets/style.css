@@ -138,7 +138,7 @@ input[type=text] {
   flex-direction:row;
   align-items:center;
   justify-content:space-between;
-  width:50%;
+  width:100%;
 }
 
 .listing-header p{
@@ -168,4 +168,8 @@ a.see-all-books{
   margin-top:10px;
   display:block;
   color: #aaa;
+}
+
+table{
+  width:100%;
 }
