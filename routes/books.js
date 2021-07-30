@@ -23,7 +23,7 @@ function asyncHandler(cb) {
 
 /* GET new book form */
 router.get('/new', asyncHandler(async(req,res)=>{
-    res.render('new_book', {book: {}, title: "New Book"})
+    res.render('new-book', {book: {}, title: "New Book"})
 }));
 
 /* POST new book form data */
@@ -38,7 +38,7 @@ router.post('/new', asyncHandler(async(req,res)=>{
     } catch (error) {
         if (error.name==="SequelizeValidationError"){
             book = await Book.build(req.body);
-            res.render("new_book",{
+            res.render("new-book",{
                 book:book,
                 errors: error.errors,
                 title: "New Book"
@@ -146,7 +146,7 @@ router.get('/:id', asyncHandler(async(req,res, next)=>{
 router.get('/:id/update', asyncHandler(async(req,res, next)=>{
     const book = await Book.findByPk(req.params.id);
     if (book){
-        res.render('update_book', {book:book, title:"Update Book"})
+        res.render('update-book', {book:book, title:"Update Book"})
     } else {
         const err = new Error();
         err.status = 404;
@@ -166,7 +166,7 @@ router.post('/:id/update', asyncHandler(async(req,res, next)=>{
             res.redirect('/books/'+book.id);
         } catch (error) {
             if (error.name==="SequelizeValidationError"){
-                res.render("update_book",{
+                res.render("update-book",{
                     book:book,
                     errors: error.errors,
                     title: "Update Book"
